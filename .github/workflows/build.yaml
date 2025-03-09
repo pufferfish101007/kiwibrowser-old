@@ -1,0 +1,54 @@
+name: build (experimental)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Maximize build disk space
+        uses: easimon/maximize-build-space@v10
+        with:
+          remove-dotnet: true
+          remove-android: true
+          remove-haskell: true
+          remove-codeql: true
+          remove-docker-images: true
+
+      - name: Clone depot_tools
+        run: git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+      - name: Add depot_tools to path
+        run: echo "${GITHUB_WORKSPACE}/depot_tools" >> "$GITHUB_PATH"
+
+      - name: Make chromium dir
+        run: mkdir chromium
+
+      - name: checkout dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: kiwibrowser/dependencies
+          path: chromium/.cipd
+
+      - name: setup dependencies
+        run: |
+          cp chromium/.cipd/.gclient chromium/
+          cp chromium/.cipd/.gclient_entries chromium/
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          path: chromium/src
+
+      - name: setup dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install python openjdk-8-jdk-headless libncurses5
+          sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+          bash chromium/install-build-deps.sh --no-chromeos-fonts
+          ./chromium/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
+          ./chromium/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
+
+      
