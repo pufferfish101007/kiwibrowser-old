@@ -1,6 +1,6 @@
 # Kiwi Browser
 
-![automatic build of apk](https://github.com/kiwibrowser/src/workflows/automatic%20build%20of%20apk/badge.svg)
+[![build (experimental)](https://github.com/pufferfish101007/kiwibrowser-old/actions/workflows/build.yaml/badge.svg)](https://github.com/pufferfish101007/kiwibrowser-old/actions/workflows/build.yaml)
 
 ## Overview
 
