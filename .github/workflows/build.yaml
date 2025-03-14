@@ -51,4 +51,20 @@ jobs:
           python2 ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
           python2 ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 
+      - name: prepare first build
+        run: |
+          cd chromium/src
+          gclient runhooks
+          gn gen out/android_arm
+
+      - name: compile kiwi browser
+        run: cd chromium/src && ninja -C out/android_arm chrome_public_apk
+
+      - name: Upload apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: kiwi-browser-apk
+          path: chromium/src/out/android_arm/apks/ChromePublic.apk
+          
+
       
