@@ -12,6 +12,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python2
+          sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 5
           sudo update-alternatives --list python
           exit 1
         
