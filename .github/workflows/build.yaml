@@ -12,7 +12,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python2
-          sudo set-alternatives --list python
+          sudo update-alternatives --list python
           exit 1
         
       - name: Maximize build disk space
