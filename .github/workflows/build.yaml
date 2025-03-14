@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python2 openjdk-8-jdk-headless libncurses5
-          update-alternatives --set python /usr/bin/python2.7
+          alias python=python2
           #sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
           bash chromium/src/install-build-deps.sh --no-chromeos-fonts
           python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
