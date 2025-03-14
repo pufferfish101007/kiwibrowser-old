@@ -8,14 +8,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: python?
-        run: |
-          sudo apt-get update
-          sudo apt-get install python2
-          sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 5
-          sudo update-alternatives --list python
-          exit 1
-        
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -54,7 +46,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python2 openjdk-8-jdk-headless libncurses5
-          sudo set-alternatives --list python
+          sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 5
           #sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
           bash chromium/src/install-build-deps.sh --no-chromeos-fonts
           python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
