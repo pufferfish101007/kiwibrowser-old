@@ -46,10 +46,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python2 openjdk-8-jdk-headless libncurses5
+          update-alternatives --set python /usr/bin/python2.7
           #sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
           bash chromium/src/install-build-deps.sh --no-chromeos-fonts
-          python2 ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
-          python2 ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
+          python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
+          python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 
       - name: prepare first build
         run: |
