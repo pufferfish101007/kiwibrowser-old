@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Maximize build disk space
@@ -32,7 +32,7 @@ jobs:
           repository: kiwibrowser/dependencies
           path: chromium/.cipd
 
-      - name: setup dependencies
+      - name: setup chromium dependencies
         run: |
           cp chromium/.cipd/.gclient chromium/
           cp chromium/.cipd/.gclient_entries chromium/
@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python openjdk-8-jdk-headless libncurses5
-          sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+          #sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
           bash chromium/install-build-deps.sh --no-chromeos-fonts
           ./chromium/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
           ./chromium/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
