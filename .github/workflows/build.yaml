@@ -45,7 +45,7 @@ jobs:
       - name: setup dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install python2 openjdk-8-jdk-headless libncurses5
+          sudo apt-get install python2 openjdk-8-jdk-headless libncurses5 cpulimit
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 5
           #sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
           bash chromium/src/install-build-deps.sh --no-chromeos-fonts
