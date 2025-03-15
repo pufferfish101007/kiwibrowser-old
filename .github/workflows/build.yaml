@@ -55,7 +55,11 @@ jobs:
       - name: gclient runhooks
         run: |
           cd chromium/src
-          gclient runhooks
+          core_count=$(nproc --all)
+          limit=$((core_count * 100 * 9 / 10))
+          echo "CPU Limit: $limit"
+          cpulimit -l $limit -- gclient runhooks
+          
       - name: gn gen
         run: |
           cd chromium/src
