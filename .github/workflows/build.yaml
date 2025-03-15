@@ -52,11 +52,14 @@ jobs:
           python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=i386
           python ./chromium/src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 
-      - name: prepare first build
+      - name: gclient runhooks
         run: |
           cd chromium/src
           gclient runhooks
-          gn gen out/android_arm
+      - name: gn gen
+        run: |
+          cd chromium/src
+          gn gen out/android_arm -v
 
       - name: compile kiwi browser
         run: cd chromium/src && ninja -C out/android_arm chrome_public_apk
